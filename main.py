@@ -12,6 +12,9 @@ JOKE = "I took the bow for a demo my agent wrote \u2014 then it autocompleted my
 
 
 def main() -> None:
+    # The sealed gate requires 1-280 Unicode code points, not only whitespace.
+    if not 1 <= len(JOKE) <= 280 or not JOKE.strip():
+        raise SystemExit("joke fails the entry gate")
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(JOKE + "\n")
